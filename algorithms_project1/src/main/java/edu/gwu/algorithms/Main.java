@@ -2,6 +2,31 @@ package edu.gwu.algorithms;
 
 import java.util.Random;
 
+/**
+ * Main.java
+ *
+ * This program benchmarks the performance of a custom nested loop algorithm
+ * using arrays of increasing size. It compares the experimental runtime
+ * against a theoretical model based on the square of the logarithm (base 2) of n.
+ *
+ * The results are printed in a formatted table showing:
+ * - Input size (n)
+ * - Experimental time in nanoseconds
+ * - Theoretical time ((log₂ n)²)
+ * - Scaling constant
+ * - Adjusted theoretical time
+ *
+ * The experiment involves multiplying elements from two randomly generated arrays
+ * using nested loops with logarithmic growth patterns.
+ *
+ * Author: @Marlone Nyapwere
+ * Created: September 26, 2025
+ * Name: Design and Analysis of Algorithms - Project 1
+ *
+ * Usage:
+ * Compile: javac Main.java
+ * Run: java Main
+ */
 public class Main {
 
     public static void main(String[] args) {
@@ -43,7 +68,11 @@ public class Main {
     }
 
     /**
-     * Generates an array of random integers between 0 and 99.
+     * Generates an array of random integers between 0 and (RANDOM_BOUND - 1).
+     *
+     * @param size The desired length of the array.
+     * @param random The Random object to use for generation.
+     * @return An array of random integers.
      */
     static int[] generateRandomArray(int size, Random random) {
         int[] array = new int[size];
@@ -55,6 +84,12 @@ public class Main {
 
     /**
      * Performs the experiment by computing a sum based on nested loops with logarithmic growth.
+     * The complexity is dictated by the factors INNER_LOOP_FACTOR (sqrt(2)) and OUTER_LOOP_FACTOR (sqrt(3)).
+     *
+     * @param a The first input array.
+     * @param b The second input array.
+     * @param n The logical size of the input arrays (also array.length).
+     * @return The accumulated sum of products from the experiment.
      */
     static long performExperiment(int[] a, int[] b, int n) {
         long sum = 0;
@@ -70,8 +105,14 @@ public class Main {
         return sum;
     }
 
+
     /**
      * Prints a formatted table of experimental and theoretical results.
+     *
+     * @param sizes The array of input sizes (n).
+     * @param experimental The array of experimental runtimes in nanoseconds.
+     * @param theoretical The array of raw theoretical values ((log₂ n)²).
+     * @param scalingConstant The scaling factor determined by the first data point.
      */
     static void printResultsTable(int[] sizes, long[] experimental, double[] theoretical, double scalingConstant) {
         System.out.printf("%-12s %-18s %-25s %-20s %-25s%n",

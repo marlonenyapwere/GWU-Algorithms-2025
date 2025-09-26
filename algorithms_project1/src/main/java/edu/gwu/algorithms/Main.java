@@ -1,0 +1,90 @@
+package edu.gwu.algorithms;
+
+import java.util.Random;
+
+public class Main {
+
+    public static void main(String[] args) {
+        int[] testSizes = {10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000};
+
+        long[] experimentalTimes = new long[testSizes.length];
+        double[] theoreticalTimes = new double[testSizes.length];
+
+        Random random = new Random();
+
+        // Run experiment
+        for (int i = 0; i < testSizes.length; i++) {
+            int n = testSizes[i];
+            int[] arrayA = generateRandomArray(n, random);
+            int[] arrayB = generateRandomArray(n, random);
+
+            long startTime = System.nanoTime();
+            long resultSum = performExperiment(arrayA, arrayB, n);
+            long endTime = System.nanoTime();
+
+            long elapsedTime = endTime - startTime;
+            experimentalTimes[i] = elapsedTime;
+            theoreticalTimes[i] = Math.pow(Math.log(n) / Math.log(2), 2); // (log₂ n)²
+        }
+
+        // Compute scaling constant using only "large n" values (≥ 100000)
+        double scalingConstant = 0;
+        int count = 0;
+        for (int i = 0; i < testSizes.length; i++) {
+            if (testSizes[i] >= 100000) {  // ignore small n
+                scalingConstant += experimentalTimes[i] / theoreticalTimes[i];
+                count++;
+            }
+        }
+        scalingConstant /= count; // average
+
+        // Print results
+        printResultsTable(testSizes, experimentalTimes, theoreticalTimes, scalingConstant);
+    }
+
+    /**
+     * Generates an array of random integers between 0 and 99.
+     */
+    static int[] generateRandomArray(int size, Random random) {
+        int[] array = new int[size];
+        for (int i = 0; i < size; i++) {
+            array[i] = random.nextInt(100);
+        }
+        return array;
+    }
+
+    /**
+     * Performs the experiment by computing a sum based on nested loops with logarithmic growth.
+     */
+    static long performExperiment(int[] a, int[] b, int n) {
+        long sum = 0;
+        int j = 5;
+        while (j < n / 2) {
+            int k = 5;
+            while (k < n) {
+                sum += (long) a[j] * b[k];
+                k = (int) (k * Math.sqrt(2));
+            }
+            j = (int) (j * Math.sqrt(3));
+        }
+        return sum;
+    }
+
+    /**
+     * Prints a formatted table of experimental and theoretical results.
+     */
+    static void printResultsTable(int[] sizes, long[] experimental, double[] theoretical, double scalingConstant) {
+        System.out.printf("%-12s %-18s %-25s %-20s %-25s%n",
+                "n", "Experimental (ns)", "Theoretical ((log₂ n)²)", "Scaling Constant", "Adjusted Theoretical");
+
+        for (int i = 0; i < sizes.length; i++) {
+            long n = sizes[i];
+            long expTime = experimental[i];
+            double theoTime = theoretical[i];
+            double adjustedTime = scalingConstant * theoTime;
+
+            System.out.printf("%-12d %-18d %-25.1f %-20.2f %-25.0f%n",
+                    n, expTime, theoTime, scalingConstant, adjustedTime);
+        }
+    }
+}

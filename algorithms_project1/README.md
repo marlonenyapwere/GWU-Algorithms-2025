@@ -55,14 +55,16 @@ Defined in `pom.xml`:
 
 ## ▶️ How to Run
 
-### 1. Compile and Run with Maven
+### 1. Clone the repo: https://github.com/marlonenyapwere/GWU-Algorithms-2025.git
+
+### 2. Compile and Run with Maven
 
 ```bash
 mvn clean compile
 mvn exec:java -Dexec.mainClass="edu.gwu.algorithms.Main"
 ```
 
-### 2. Compile and Run without Maven
+### 3. Compile and Run without Maven
 
 ```bash
 javac src/main/java/edu/gwu/algorithms/Main.java -d out
@@ -91,19 +93,7 @@ mvn test
 
 Example table from experimental runs:
 
-```
-n            Experimental (ns)   Theoretical ((log₂ n)²)   Scaling Constant   Adjusted Theoretical
-10           1035                11.0                      94.00              1035
-100          2827                44.1                      94.00              4140
-1000         4577                99.3                      94.00              9315
-10000        7948                176.6                     94.00              16560
-100000       23876               275.9                     94.00              25875
-1000000      38352               397.3                     94.00              37260
-10000000     59600               540.7                     94.00              50715
-100000000    70141               706.3                     94.00              66240
-```
-
----
+![img.png](img.png)
 
 ## 📈 Observations
 

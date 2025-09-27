@@ -99,7 +99,7 @@ Example table from experimental runs:
 
 - At **small n**, experimental results are noisy due to JVM warm-up and timer resolution.
 - At **large n**, experimental and theoretical results converge closely.
-- Experimental evidence strongly supports the asymptotic hypothesis of **Θ((log n)²)**.
+- Experimental evidence strongly supports the asymptotic hypothesis of **Θ((log n)²)**
 
 ---
 

@@ -1,4 +1,4 @@
-package edu.gwu.algorithms;
+package edu.gwu.algorithms.algorithms;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;

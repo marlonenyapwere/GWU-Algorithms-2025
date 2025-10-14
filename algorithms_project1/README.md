@@ -61,14 +61,14 @@ Defined in `pom.xml`:
 
 ```bash
 mvn clean compile
-mvn exec:java -Dexec.mainClass="edu.gwu.algorithms.Main"
+mvn exec:java -Dexec.mainClass="algorithms.edu.gwu.algorithms.Main"
 ```
 
 ### 3. Compile and Run without Maven
 
 ```bash
 javac src/main/java/edu/gwu/algorithms/Main.java -d out
-java -cp out edu.gwu.algorithms.Main
+java -cp out algorithms.edu.gwu.algorithms.Main
 ```
 
 ---

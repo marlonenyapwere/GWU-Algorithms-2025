@@ -1,4 +1,4 @@
-package edu.gwu.algorithms;
+package edu.gwu.algorithms.algorithms;
 
 import java.util.Random;
 

@@ -78,7 +78,7 @@ public class ConvexHullStableBenchmark {
     }
 
     /** Generates random 2D integer points within [-10^6, 10^6]. */
-    static int[][] generateRandomPoints(int n, Random random) {
+    public static int[][] generateRandomPoints(int n, Random random) {
         int[][] points = new int[n][2];
         for (int i = 0; i < n; i++) {
             points[i][0] = random.nextInt(2_000_001) - 1_000_000;
@@ -88,7 +88,7 @@ public class ConvexHullStableBenchmark {
     }
 
     /** Convex Hull via Monotone Chain algorithm – O(n log n). */
-    static List<int[]> convexHull(int[][] pts) {
+    public static List<int[]> convexHull(int[][] pts) {
         if (pts.length < 3) return Arrays.asList(pts);
 
         Arrays.sort(pts, (a, b) -> a[0] != b[0] ? a[0] - b[0] : a[1] - b[1]);
